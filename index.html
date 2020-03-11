@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Submarino</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<section class="inicio">
+			<div class="balao" data-href="1">
+        <h1>Laura Lemos</h1>
+        <p>Designer de Experiência<br>ThoughtWorks</p>
+      </div>
+			<div class="container">
+				<div class="janela laura"></div>
+				<div class="janela zalba"></div>
+			</div>
+			<a href="./submarino.html">Jogar</a>
+		</section>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+      var balaoUm = '<h1>Zalba Monteiro</h1>'+
+      '<p>Desenvolvedora Front-End CWI Software</p>';
+
+      var balaoDois = '<h1 style="font-size: 30px">Humanizando Interfaces com Gamificação e CSS</h1>'+
+      '<p>TDC Porto Alegre 2018</p>';
+
+      var balaoTres = '<h1>Vamos jogar?</h1>'+
+      '<p>Navegue pelo oceano dentro do submarino e colete todas as recompensas perdidas</p>';
+
+      $(document).keydown(function(e) {
+          switch (e.keyCode) {
+            case 13:
+                if(parseInt($('.balao').attr('data-href')) == 1){
+                  $('.balao').attr('data-href', 2)
+                  $('.balao').html(balaoUm)
+                  $('.balao').addClass('zalbaB')
+                }
+                else if(parseInt($('.balao').attr('data-href')) == 2){
+                  $('.balao').attr('data-href', 3)
+                  $('.balao').html(balaoDois)
+                  $('.balao').removeClass('zalbaB')
+                }
+                else if(parseInt($('.balao').attr('data-href')) == 3){
+                  $('.balao').attr('data-href', 0)
+                  $('.balao').html(balaoTres)
+                  $('.balao').addClass('zalbaB')
+                }
+
+              break;
+          }
+      });
+    </script>
+	</body>
+</html>

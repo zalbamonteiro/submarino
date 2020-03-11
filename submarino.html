@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <title>Submarino</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+      <div class="cenario">
+        <div class="oceano"></div>
+        <div class="areia"></div>
+        <div class="container-oceano">
+          <div class="planta"></div>
+          <div class="planta planta--2"></div>
+          <div class="planta planta--3"></div>
+          <div class="planta planta--4"></div>
+
+          <div class="coral"></div>
+          <div class="coral coral--2"></div>
+          <div class="coral coral--3"></div>
+          <div class="coral coral--4"></div>
+
+          <div class="garrafa" id="garrafa-um">
+            <div class="garrafa__bico"></div>
+            <div class="garrafa__vidro"></div>
+          </div>
+
+
+          <div class="garrafa" id="garrafa-dois">
+            <div class="garrafa__bico"></div>
+            <div class="garrafa__vidro"></div>
+          </div>
+
+          <div class="garrafa" id="garrafa-tres">
+            <div class="garrafa__bico"></div>
+            <div class="garrafa__vidro"></div>
+          </div>
+
+          <div class="garrafa" id="garrafa-quatro">
+            <div class="garrafa__bico"></div>
+            <div class="garrafa__vidro"></div>
+          </div>
+
+          <div class="garrafa" id="garrafa-cinco">
+            <div class="garrafa__bico"></div>
+            <div class="garrafa__vidro"></div>
+          </div>
+        </div>
+      </div>
+      <div class="submarino" id='submarino'>
+        <div class="submarino__bolhas">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="submarino__helice">
+          <ul class="submarino__helice__elemento">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="submarino__corpo__escotilha">
+          <div class="submarino__corpo__escotilha__elementos submarino__corpo__escotilha__elementos--top"></div>
+          <div class="submarino__corpo__escotilha__elementos submarino__corpo__escotilha__elementos--medio"></div>
+          <div class="submarino__corpo__escotilha__elementos submarino__corpo__escotilha__elementos--base"></div>
+        </div>
+        <div class="submarino__corpo">
+          <ul class="submarino__corpo__janelas">
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="submarino__farol">
+          <div class="submarino__farol__elemento"></div>
+          <div class="submarino__farol__luz"></div>
+        </div>
+      </div><!-- end submarino -->
+
+      <div class="peixaoContainer">
+  			<div class="peixaoNadadeira"></div>
+  			<div class="peixao"></div>
+  			<div class="peixaoOlho"></div>
+  			<div class="peixaoBoca"></div>
+  		</div>
+
+      <div class="peixe azul">
+        <div class="peixe__olhos"></div>
+        <div class="peixe__nadadeira"></div>
+        <div class="peixe__calda"></div>
+      </div>
+
+      <div class="peixe vermelho">
+        <div class="peixe__olhos"></div>
+        <div class="peixe__nadadeira"></div>
+        <div class="peixe__calda"></div>
+      </div>
+
+      <div class="peixe verde">
+        <div class="peixe__olhos"></div>
+        <div class="peixe__nadadeira"></div>
+        <div class="peixe__calda"></div>
+      </div>
+
+      <div class="peixe amarelo">
+        <div class="peixe__olhos"></div>
+        <div class="peixe__nadadeira"></div>
+        <div class="peixe__calda"></div>
+      </div>
+
+      <div class='modal' id="modal" data-href='0' data-step='0' data-open="false">
+        <div class="modal__overley"></div>
+        <div class="modal__content">
+          <div class="modal__content__left"></div>
+          <div class="modal__content__center">
+          </div>
+          <div class="modal__content__right"></div>
+        </div>
+      </div>
+
+      <script src="jquery-3.3.1.min.js"></script>
+      <script type="text/javascript">
+
+        $(document).keydown(function(e) {
+            console.log('luz submarino', parseInt($("#submarino .submarino__farol__luz").offset().left))
+            //console.log(e.keyCode);
+
+
+
+            switch (e.keyCode) {
+              case 13:
+                  checkModal();
+                break;
+              case 32:
+                  console.log('barra espaço')
+                break;
+              case 37:
+                  console.log('esquerda')
+                  if(parseInt($("#submarino .submarino__farol__luz").offset().left) > 500 && parseInt($('.oceano').offset().left) < 0){
+                    $('.oceano').animate({left: "+=12"}, 0);
+                    $('.container-oceano').animate({left: "+=12"}, 0);
+                  }
+                  else{
+                    if(parseInt($('.oceano').offset().left) < 20 && parseFloat($("#submarino .submarino__farol__luz").offset().left) > 300){
+                      $("#submarino").animate({left: "-=12"}, 0)
+                    }
+                  }
+                break;
+              case 38:
+                  console.log('cima')
+                  $("#submarino").animate({top: "-=12"}, 0)
+                break;
+              case 39:
+                  console.log('direita')
+                  if(parseInt($("#submarino .submarino__farol__luz").offset().left) > 1100){
+                    if((parseFloat($('.oceano').offset().left)) > - 4400){
+                      $('.oceano').animate({left: "-=12"}, 0);
+                      $('.container-oceano').animate({left: "-=12"}, 0);
+                    }
+                  }
+                  else{
+                    $("#submarino").animate({left: "+=12"}, 0)
+                  }
+                break;
+                case 40:
+                    console.log('baixo')
+                    $("#submarino").animate({top: "+=12"}, 0)
+                  break;
+              default:
+            }
+
+            modaOpen();
+
+        });
+
+        function modaOpen(){
+          var contentModal  = '';
+          var luzOffset     = $("#submarino .submarino__farol__luz").offset();
+          var modalIsOpen   = $("#modal").attr('data-open');
+          var jogoSteps     = parseInt($("#modal").attr('data-href'));
+
+          switch (jogoSteps) {
+            case 0:
+              if(modalIsOpen == 'false'){
+                var garrafaZone = $('#garrafa-um').offset();
+                contentModal    = '<h1>Gamificação</h1><h3>O que é o conceito e por quê você deveria usar?</h3>';
+                if((garrafaZone !== undefined) && (parseInt(luzOffset.left)+ 70) > (parseInt(garrafaZone.left) - 50) && (parseInt(luzOffset.top) + 100) > (parseInt(garrafaZone.top))){
+                  $("#modal").attr('data-href', 1)
+                  $("#modal").attr('data-open', true)
+                  modalCustom(contentModal);
+                }
+              }
+              break;
+
+            case 1:
+              if(modalIsOpen == 'false'){
+                var garrafaZone = $('#garrafa-dois').offset();
+                contentModal = '<h1>Benefícios</h1>'+
+                '<dl class="">'+
+                  '<dt>Stakeholders</dt>'+
+                    '<dd><span>+</span> Taxa de engajamento</dd>'+
+                    '<dd><span>+</span> Humanização do produto</dd>'+
+                    '<dd><span>+</span> Tempo de permanencia</dd>'+
+                    '<dd><span>-</span> Taxa de abandono</dd>'+
+                '</dl>';
+
+                if((garrafaZone !== undefined) && (parseInt(luzOffset.left)+ 70) > (parseInt(garrafaZone.left) - 50) && (parseInt(luzOffset.top) + 100) > (parseInt(garrafaZone.top))){
+                  $("#modal").attr('data-href', 2)
+                  $("#modal").attr('data-open', true)
+                  modalCustom(contentModal);
+                }
+              }
+              break;
+            case 2:
+              if(modalIsOpen == 'false'){
+                var garrafaZone = $('#garrafa-tres').offset();
+                contentModal = '<h1>CSS</h1><h3>Por quê é uma boa opção para gamificar?</h3>';
+                if((garrafaZone !== undefined) && (parseInt(luzOffset.left)+ 70) > (parseInt(garrafaZone.left) - 50) && (parseInt(luzOffset.top) + 100) > (parseInt(garrafaZone.top))){
+                  $("#modal").attr('data-href', 3)
+                  $("#modal").attr('data-open', true)
+                  modalCustom(contentModal);
+                }
+              }
+              break;
+            case 3:
+              if(modalIsOpen == 'false'){
+                var garrafaZone = $('#garrafa-quatro').offset();
+                contentModal = '<h1>Desempenho</h1><br>'+
+                '<dl class="">'+
+                    '<dd><span>></span> CSS x jQuery : jQuery não possui mecanismo para evitar o "Layout Trashing"</dd><br><br>'+
+                    '<dd><span>></span> CSS x Velocity x GSAP: desempenho equivalente ou até melhor nas libs JS, dependendo da complexidade da animação</dd>'+
+                '</dl>';
+                if((garrafaZone !== undefined) && (parseInt(luzOffset.left)+ 70) > (parseInt(garrafaZone.left) - 50) && (parseInt(luzOffset.top) + 100) > (parseInt(garrafaZone.top))){
+                  $("#modal").attr('data-href', 4)
+                  $("#modal").attr('data-open', true)
+                  modalCustom(contentModal);
+                }
+              }
+              break;
+            case 4:
+              if(modalIsOpen == 'false'){
+                var garrafaZone = $('#garrafa-cinco').offset();
+                contentModal = '<h1>Conclusão</h1><h3>Afinal de contas, quando usar gamificação, CSS ou JS?</h3>';
+                if((garrafaZone !== undefined) && (parseInt(luzOffset.left)+ 70) > (parseInt(garrafaZone.left) - 50) && (parseInt(luzOffset.top) + 100) > (parseInt(garrafaZone.top))){
+                  $("#modal").attr('data-href', 5)
+                  $("#modal").attr('data-open', true)
+                  modalCustom(contentModal);
+                }
+              }
+              break;
+          }
+        }
+
+        function modalCustom( content){
+          $("#modal .modal__content__center").html(content);
+          $("#modal").fadeIn();
+          $(".modal__overley").addClass("show");
+          $(".modal__content").addClass("show");
+        }
+
+        function modalChangeContent( content ){
+          $("#modal .modal__content__center").html(content);
+        }
+
+        function modalClose(){
+          $("#modal .modal__content__center").html('')
+          $("#modal").fadeOut();
+          $(".modal__overley").removeClass("show");
+          $(".modal__content").removeClass("show");
+        }
+
+
+        function checkModal(){
+          var modalIsOpen = $("#modal").attr('data-open');
+          if(modalIsOpen == 'true'){
+            var stepModal = parseInt($("#modal").attr('data-step'))
+            var jogoSteps = parseInt($("#modal").attr('data-href'));
+            modalMove(stepModal, jogoSteps)
+          }
+        }
+
+        function modalMove(stepModal, stepJogo){
+          switch (stepJogo){
+            case 1:
+              if(stepModal == 0){
+                contentModal = '<div>'+
+                  '<h2>1.2 bilhões</h2>'+
+                  '<h3>de jogadores pelo mundo</h3>'+
+                '</div>'+
+                '<div class="">'+
+                  '<h2>700 milhões</h2>'+
+                  '<h3>jogam online</h3>'+
+                '</div>'+
+                '<div class="">'+
+                  '<h2>44%</h2>'+
+                  '<h3>da população online</h3>'+
+                '</div>';
+
+                modalChangeContent(contentModal);
+                $("#modal").attr('data-step', 1)
+              }
+              if(stepModal == 1){
+                contentModal = '<h2>Gamificação é engajar pessoas para atingir um objetivo de forma lúdica</h2>'+
+                '<p>Aplicar elementos de jogos e técnicas de design de jogos digitais em outros contextos, como negócios, educação e impacto social.</p>';
+
+                modalChangeContent(contentModal);
+                $("#modal").attr('data-step', 2)
+              }
+              if(stepModal == 2){
+                $("#modal").attr('data-step', 0)
+                $("#modal").attr('data-open', false)
+                modalClose();
+              }
+              break;
+            case 2:
+              if(stepModal == 0){
+                contentModal = '<h1>Benefícios</h1>'+
+                '<dl class="">'+
+                  '<dt>Usuários</dt>'+
+                    '<dd><span>+</span>Persistência e Realização</dd>'+
+                    '<dd><span>+</span>Otimismo e Diversão</dd>'+
+                    '<dd><span>+</span>Cooperação e Competição</dd>'+
+                    '<dd><span>+</span>Motivação e Premiação</dd>'+
+                '</dl>';
+                modalChangeContent(contentModal);
+                $("#modal").attr('data-step', 1)
+              }
+              if(stepModal == 1){
+                $("#modal").attr('data-step', 0)
+                $("#modal").attr('data-open', false)
+                modalClose();
+              }
+              break;
+            case 3:
+              if(stepModal == 0){
+                contentModal = '<h1>Animações em CSS</h1>'+
+                '<dl class="">'+
+                  '<dt>Desvantagens</dt>'+
+                    '<dd>Rotação, escala e posição aninhados na propriedade <strong>transform</strong></dd>'+
+                '</dl>';
+                modalChangeContent(contentModal);
+                $("#modal").attr('data-step', 1)
+              }
+              if(stepModal == 1){
+                contentModal = '<h1>Animações em CSS</h1>'+
+                '<dl class="">'+
+                  '<dt>Vantagens</dt>'+
+                    '<dd><strong>Execução:</strong> transfere a responsabilidade de execução e gerenciamento para o navegador</dd>'+
+                    '<dd><strong>Compatibilidade:</strong> mobile first e não conflita com outras libs do projeto</dd>'+
+                    '<dd><strong>Aprendizado:</strong> CSS é universal e, talvez, atemporal. Já as libs em JavaScript....</dd>'+
+                '</dl>';
+                modalChangeContent(contentModal);
+                $("#modal").attr('data-step', 2)
+              }
+              if(stepModal == 2){
+                $("#modal").attr('data-step', 0)
+                $("#modal").attr('data-open', false)
+                modalClose();
+              }
+              break;
+            case 4:
+              if(stepModal == 0){
+                contentModal = '<h1>Desempenho</h1><br>'+
+                '<dl class="">'+
+                    '<dd><span>></span> CSS é declarativo: o navegador isola os elementos animados nas camadas de GPU</dd><br><br>'+
+                    '<dd><span>></span> 1 Thread: CSS dá a capacidade de utilização de um thread de CPU diferente para cálculos relacionados à animação</dd>'+
+                '</dl>';
+                modalChangeContent(contentModal);
+                $("#modal").attr('data-step', 1)
+              }
+              if(stepModal == 1){
+                $("#modal").attr('data-step', 0)
+                $("#modal").attr('data-open', false)
+                modalClose();
+              }
+              break;
+            case 5:
+              if(stepModal == 0){
+                contentModal = '<h1>Quando usar?</h1>'+
+                '<dl class="">'+
+                    '<dd><span>-</span> <strong>Gamificação:</strong> engajar pessoas para resolver um problema, atingir um objetivo, desenvolver motivação e espírito de equipe ou fidelizar/encantar clientes</dd>'+
+                    '<dd><span>-</span> <strong>CSS:</strong> desenhos, animações e interações de baixa ou média complexidade</dd>'+
+                    '<dd><span>-</span> <strong>JavaScript:</strong> interações e animações de alta complexidade</dd>'+
+                '</dl>';
+                modalChangeContent(contentModal);
+                $("#modal").attr('data-step', 1)
+              }
+              if(stepModal == 1){
+                contentModal = '<h1>Obrigada!</h1>'+
+                '<dl class="">'+
+                    '<dt>Perguntas?</dt>'+
+                    '<dd>laudlemos@gmail.com</dd>'+
+                    '<dd>zalbasmonteiro@gmail.com</dd>'+
+                '</dl>';
+                modalChangeContent(contentModal);
+                $("#modal").attr('data-step', 2)
+              }
+              if(stepModal == 2){
+                $("#modal").attr('data-step', 0)
+                $("#modal").attr('data-open', false)
+                modalClose();
+              }
+              break;
+
+          }
+
+        }
+
+
+      </script>
+  </body>
+</html>
